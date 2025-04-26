@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>แบบประเมินความพึงพอใจ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    header img {
+      width: 60px;
+      height: auto;
+      margin-right: 15px;
+    }
+    h1, h2 {
+      margin: 5px 0;
+    }
+    .rating-btn {
+      font-size: 40px;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .label {
+      display: block;
+      font-size: 18px;
+      margin-top: 5px;
+    }
+    .giraffe-section {
+      margin-top: 40px;
+    }
+    .giraffe-section img {
+      width: 150px;
+      height: auto;
+    }
+    .giraffe-text {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #555;
+    }
+    #thanks {
+      color: green;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+    #username-section {
+      margin: 20px 0;
+    }
+    #logout-btn {
+      margin-top: 10px;
+      font-size: 14px;
+      color: red;
+      background: none;
+      border: none;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="ตรา.jpg" alt="โลโก้คลินิค">
+    <div>
+      <h1>ขอบคุณที่ใช้บริการ ร้านยาคลินิค ยา มอ ออ ครับ</h1>
+      <h2>แบบประเมินความพึงพอใจต่อการรับบริการ</h2>
+    </div>
+  </header>
+
+  <div id="username-section">
+    <label for="username">กรุณากรอก Username (001 - 009):</label>
+    <input type="text" id="username" maxlength="3">
+    <button onclick="saveUsername()">ยืนยัน</button>
+  </div>
+
+  <div id="ratings" style="display:none;">
+    <button class="rating-btn" onclick="submitRating('5')">😍<span class="label">ดีมาก</span></button>
+    <button class="rating-btn" onclick="submitRating('4')">😊<span class="label">ดี</span></button>
+    <button class="rating-btn" onclick="submitRating('3')">😐<span class="label">พอใช้</span></button>
+    <button class="rating-btn" onclick="submitRating('2')">😕<span class="label">แย่</span></button>
+    <button class="rating-btn" onclick="submitRating('1')">😠<span class="label">แย่ที่สุด</span></button><br>
+    <button id="logout-btn" onclick="logout()">ออกจากระบบ</button>
+  </div>
+
+  <p id="thanks"></p>
+
+  <div class="giraffe-section">
+    <img src="ยีราฟ.jpg" alt="ยีราฟคลินิค">
+    <div class="giraffe-text">
+      ทุกความคิดเป็นของท่าน เป็นประโยชน์ต่อการพัฒนาของเรา
+    </div>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwUMsov4I1-57WR6gNq_7rpd22wQiRgvrfkcrD48IUeDLFNZci4cQLsPF67Y3yLY-uE9A/exec';
+
+    window.onload = function() {
+      const storedUsername = localStorage.getItem('username');
+      if (storedUsername) {
+        document.getElementById('username-section').style.display = 'none';
+        document.getElementById('ratings').style.display = 'block';
+      }
+    };
+
+    function saveUsername() {
+      const username = document.getElementById('username').value;
+      if (!username || !/^(001|002|003|004|005|006|007|008|009)$/.test(username)) {
+        alert('กรุณากรอก Username เป็นตัวเลขระหว่าง 001 ถึง 009');
+        return;
+      }
+      localStorage.setItem('username', username);
+      document.getElementById('username-section').style.display = 'none';
+      document.getElementById('ratings').style.display = 'block';
+    }
+
+    function logout() {
+      localStorage.removeItem('username');
+      location.reload();
+    }
+
+    function submitRating(score) {
+      const username = localStorage.getItem('username');
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new URLSearchParams({ score, username })
+      }).then(() => {
+        document.getElementById('thanks').textContent = 'ขอบคุณสำหรับการประเมิน!';
+        setTimeout(() => {
+          document.getElementById('thanks').textContent = '';
+        }, 1500);
+      }).catch(error => alert('ส่งข้อมูลไม่สำเร็จ: ' + error));
+    }
+  </script>
+</body>
+</html>
