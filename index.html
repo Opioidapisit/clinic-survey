@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>แบบประเมินความพึงพอใจ</title>
+  <title>ความพึงพอใจต่อการรับบริการ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -134,7 +134,7 @@
         method: 'POST',
         body: new URLSearchParams({ score, username })
       }).then(() => {
-        document.getElementById('thanks').textContent = 'ขอบคุณสำหรับการประเมิน!';
+        document.getElementById('thanks').textContent = 'ขอบคุณสำหรับการประเมิน💚';
         setTimeout(() => {
           document.getElementById('thanks').textContent = '';
         }, 1500);
