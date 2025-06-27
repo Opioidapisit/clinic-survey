@@ -9,6 +9,7 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 20px;
       text-align: center;
+      padding-bottom: 160px; /* to prevent content from being hidden under promo bar */
     }
     header {
       display: flex;
@@ -66,6 +67,25 @@
       text-decoration: underline;
       cursor: pointer;
     }
+    .promo-carousel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #f8f8f8;
+      overflow-x: auto;
+      display: flex;
+      border-top: 1px solid #ccc;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .promo-carousel img {
+      width: 100%;
+      max-height: 300px;
+      flex: 0 0 100%;
+      object-fit: contain;
+      scroll-snap-align: center;
+    }
   </style>
 </head>
 <body>
@@ -99,6 +119,14 @@
     <div class="giraffe-text">
       ทุกความคิดเป็นของท่าน เป็นประโยชน์ต่อการพัฒนาของเรา
     </div>
+  </div>
+
+  <div class="promo-carousel">
+    <img src="promo1.jpg" alt="โปร 1">
+    <img src="promo2.jpg" alt="โปร 2">
+    <img src="promo3.jpg" alt="โปร 3">
+    <img src="promo4.jpg" alt="โปร 4">
+    <img src="promo5.jpg" alt="โปร 5">
   </div>
 
   <script>
@@ -140,6 +168,19 @@
         }, 1500);
       }).catch(error => alert('ส่งข้อมูลไม่สำเร็จ: ' + error));
     }
-  </script>
+  
+    let autoSlideIndex = 0;
+    const carousel = document.querySelector(".promo-carousel");
+    const promoImages = document.querySelectorAll(".promo-carousel img");
+
+    setInterval(() => {
+      autoSlideIndex = (autoSlideIndex + 1) % promoImages.length;
+      carousel.scrollTo({
+        left: promoImages[autoSlideIndex].offsetLeft,
+        behavior: 'smooth'
+      });
+    }, 10000);
+    </script>
+    
 </body>
 </html>
