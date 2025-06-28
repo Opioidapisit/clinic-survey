@@ -95,6 +95,36 @@
       object-fit: contain;
       scroll-snap-align: center;
     }
+	.small-btn {
+margin-top: 10px;  
+font-size: 14px;
+  color: #0066cc;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#imageModal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+}
+
+#imageModal img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease;
+}
+
   </style>
 </head>
 <body>
@@ -112,14 +142,19 @@
     <button onclick="saveUsername()">ยืนยัน</button>
   </div>
 
-  <div id="ratings" style="display:none;">
-    <button class="rating-btn" onclick="submitRating('5')">😍<span class="label">ดีมาก</span></button>
-    <button class="rating-btn" onclick="submitRating('4')">😊<span class="label">ดี</span></button>
-    <button class="rating-btn" onclick="submitRating('3')">😐<span class="label">พอใช้</span></button>
-    <button class="rating-btn" onclick="submitRating('2')">😕<span class="label">แย่</span></button>
-    <button class="rating-btn" onclick="submitRating('1')">😠<span class="label">แย่ที่สุด</span></button><br>
+ <div id="ratings" style="display:none;">
+  <button class="rating-btn" onclick="submitRating('5')">😍<span class="label">ดีมาก</span></button>
+  <button class="rating-btn" onclick="submitRating('4')">😊<span class="label">ดี</span></button>
+  <button class="rating-btn" onclick="submitRating('3')">😐<span class="label">พอใช้</span></button>
+  <button class="rating-btn" onclick="submitRating('2')">😕<span class="label">แย่</span></button>
+  <button class="rating-btn" onclick="submitRating('1')">😠<span class="label">แย่ที่สุด</span></button><br>
+
+  <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px;">
     <button id="logout-btn" onclick="logout()">ออกจากระบบ</button>
+    <button class="small-btn" onclick="showImage('pain')">Pain Score</button>
+    <button class="small-btn" onclick="showImage('skin')">Skin Chart</button>
   </div>
+</div> 
 
   <p id="thanks"></p>
 
@@ -189,7 +224,24 @@
         behavior: 'smooth'
       });
     }, 8000);
+function showImage(type) {
+  const modal = document.getElementById('imageModal');
+  const img = document.getElementById('modalImage');
+  if (type === 'pain') {
+    img.src = 'pain_score.jpg';
+  } else if (type === 'skin') {
+    img.src = 'skin_chart.jpg';
+  }
+  modal.style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('imageModal').style.display = 'none';
+}
     </script>
     
+<div id="imageModal" onclick="closeModal()">
+  <img id="modalImage" src="" alt="แสดงภาพ">
+</div>
 </body>
 </html>
