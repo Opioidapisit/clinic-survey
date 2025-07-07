@@ -142,12 +142,21 @@ font-size: 14px;
     <button onclick="saveUsername()">ยืนยัน</button>
   </div>
 
+<div style="margin-top: 10px;">
+  <label style="font-size: 14px;">
+    <input type="checkbox" id="firstTime"> ฉันใช้บริการที่นี่เป็นครั้งแรก
+  </label>
+</div>
+
  <div id="ratings" style="display:none;">
   <button class="rating-btn" onclick="submitRating('5')">😍<span class="label">ดีมาก</span></button>
   <button class="rating-btn" onclick="submitRating('4')">😊<span class="label">ดี</span></button>
   <button class="rating-btn" onclick="submitRating('3')">😐<span class="label">พอใช้</span></button>
   <button class="rating-btn" onclick="submitRating('2')">😕<span class="label">แย่</span></button>
   <button class="rating-btn" onclick="submitRating('1')">😠<span class="label">แย่ที่สุด</span></button><br>
+
+
+
 
   <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px;">
     <button id="logout-btn" onclick="logout()">ออกจากระบบ</button>
@@ -174,7 +183,7 @@ font-size: 14px;
   </div>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwUMsov4I1-57WR6gNq_7rpd22wQiRgvrfkcrD48IUeDLFNZci4cQLsPF67Y3yLY-uE9A/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwwgd4uW8H8C6IJp82W9C_2Rg-Ql2YigJ046MojaoPi-5pOZ7eJYzA0QqDuZKZN_cch/exec';
 
     window.onload = function() {
       const storedUsername = localStorage.getItem('username');
@@ -201,17 +210,34 @@ font-size: 14px;
     }
 
     function submitRating(score) {
-      const username = localStorage.getItem('username');
-      fetch(scriptURL, {
-        method: 'POST',
-        body: new URLSearchParams({ score, username })
-      }).then(() => {
-        document.getElementById('thanks').textContent = 'ขอบคุณสำหรับการประเมิน💚';
-        setTimeout(() => {
-          document.getElementById('thanks').textContent = '';
-        }, 500);
-      }).catch(error => alert('ส่งข้อมูลไม่สำเร็จ: ' + error));
-    }
+  const username = localStorage.getItem('username');
+  const firstTimeChecked = document.getElementById('firstTime')?.checked;
+
+  const data = new URLSearchParams();
+  data.append('score', score);
+  data.append('username', username);
+  if (firstTimeChecked) {
+    data.append('firstTime', 'true');
+  }
+
+  fetch(scriptURL, {
+    method: 'POST',
+    body: data
+  }).then(() => {
+    document.getElementById('thanks').textContent = 'ขอบคุณสำหรับการประเมิน💚';
+
+    // ล้าง checkbox
+    const checkbox = document.getElementById('firstTime');
+    if (checkbox) checkbox.checked = false;
+
+    setTimeout(() => {
+      document.getElementById('thanks').textContent = '';
+    }, 1500);
+  }).catch(error => alert('ส่งข้อมูลไม่สำเร็จ: ' + error));
+}
+
+
+
   
     let autoSlideIndex = 0;
     const carousel = document.querySelector(".promo-carousel");
