@@ -51,9 +51,19 @@
       transform: scale(1.05);
     }
     .label {
-      display: block;
-      font-size: 18px;
-      margin-top: 5px;
+  font-family: 'Kanit', sans-serif;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.label-5 { color: #1b5e20; }   /* เขียวเข้ม */
+.label-4 { color: #388e3c; }   /* เขียวธรรมดา */
+.label-3 { color: #a6531b; }   /* เหลืองเข้ม */
+.label-2 { color: #bf360c; }   /* ส้ม */
+.label-1 { color: #b71c1c; }   /* แดงเข้ม */
     }
     .giraffe-section {
       margin-top: 40px;
@@ -132,6 +142,13 @@ font-size: 14px;
   box-shadow: 0 0 20px rgba(0,0,0,0.6);
   transition: transform 0.3s ease;
 }
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  transform: scale(1);
+  margin-right: 8px;
+  cursor: pointer;
+}
 
   </style>
 </head>
@@ -150,34 +167,35 @@ font-size: 14px;
     <button onclick="saveUsername()">ยืนยัน</button>
   </div>
 
-<div style="margin-top: 10px;">
-  <label style="font-size: 14px;">
+<div style="margin-top: 40px;">
+  <label style="font-size: 18px;">
     <input type="checkbox" id="firstTime"> ฉันใช้บริการที่นี่เป็นครั้งแรก
   </label>
 </div>
 
- <div id="ratings" style="display:none;">
+<div id="ratings" style="display:none;">
   <button class="rating-btn" onclick="submitRating('5')">
     <img src="S.5.png" class="emoji-img" alt="ดีมาก">
-    <span class="label">ดีมาก</span>
+    <span class="label label-5">ดีมาก</span>
   </button>
   <button class="rating-btn" onclick="submitRating('4')">
     <img src="S.4.png" class="emoji-img" alt="ดี">
-    <span class="label">ดี</span>
+    <span class="label label-4">ดี</span>
   </button>
   <button class="rating-btn" onclick="submitRating('3')">
     <img src="S.3.png" class="emoji-img" alt="เฉยๆ">
-    <span class="label">เฉยๆ</span>
+    <span class="label label-3">เฉยๆ</span>
   </button>
   <button class="rating-btn" onclick="submitRating('2')">
     <img src="S.2.png" class="emoji-img" alt="แย่">
-    <span class="label">แย่</span>
+    <span class="label label-2">แย่</span>
   </button>
   <button class="rating-btn" onclick="submitRating('1')">
     <img src="S.1.png" class="emoji-img" alt="แย่ที่สุด">
-    <span class="label">แย่ที่สุด</span>
+    <span class="label label-1">แย่ที่สุด</span>
   </button>
 </div>
+
 
   <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px;">
     <button id="logout-btn" onclick="logout()">ออกจากระบบ</button>
