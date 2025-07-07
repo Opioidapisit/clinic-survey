@@ -28,6 +28,14 @@
     h1, h2 {
       margin: 5px 0;
     }
+.emoji-img {
+ 	 width: 80px;
+ 	 height: 80px;
+  	object-fit: contain;
+ 	 display: block;
+  	margin: 0 auto;
+	}
+
     .rating-btn {
       font-size: 40px;
       margin: 10px;
@@ -149,14 +157,27 @@ font-size: 14px;
 </div>
 
  <div id="ratings" style="display:none;">
-  <button class="rating-btn" onclick="submitRating('5')">😍<span class="label">ดีมาก</span></button>
-  <button class="rating-btn" onclick="submitRating('4')">😊<span class="label">ดี</span></button>
-  <button class="rating-btn" onclick="submitRating('3')">😐<span class="label">พอใช้</span></button>
-  <button class="rating-btn" onclick="submitRating('2')">😕<span class="label">แย่</span></button>
-  <button class="rating-btn" onclick="submitRating('1')">😠<span class="label">แย่ที่สุด</span></button><br>
-
-
-
+  <button class="rating-btn" onclick="submitRating('5')">
+    <img src="S.5.png" class="emoji-img" alt="ดีมาก">
+    <span class="label">ดีมาก</span>
+  </button>
+  <button class="rating-btn" onclick="submitRating('4')">
+    <img src="S.4.png" class="emoji-img" alt="ดี">
+    <span class="label">ดี</span>
+  </button>
+  <button class="rating-btn" onclick="submitRating('3')">
+    <img src="S.3.png" class="emoji-img" alt="เฉยๆ">
+    <span class="label">เฉยๆ</span>
+  </button>
+  <button class="rating-btn" onclick="submitRating('2')">
+    <img src="S.2.png" class="emoji-img" alt="แย่">
+    <span class="label">แย่</span>
+  </button>
+  <button class="rating-btn" onclick="submitRating('1')">
+    <img src="S.1.png" class="emoji-img" alt="แย่ที่สุด">
+    <span class="label">แย่ที่สุด</span>
+  </button>
+</div>
 
   <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px;">
     <button id="logout-btn" onclick="logout()">ออกจากระบบ</button>
