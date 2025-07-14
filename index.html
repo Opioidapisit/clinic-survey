@@ -14,20 +14,28 @@
       padding-bottom: 160px; /* to prevent content from being hidden under promo bar */
     }
     header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    header img {
-      width: 100px;
-      height: auto;
-      margin-right: 15px;
-    }
-    h1, h2 {
-      margin: 5px 0;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ✅ จัดกึ่งกลางแนวนอน */
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  text-align: center;       /* ✅ จัดข้อความให้อยู่กลาง */
+  gap: 10px;
+}
+
+header img {
+  width: 80px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.header-text h1 {
+  font-size: 40px;
+  color: #0d47a1;
+  font-weight: bold;
+  margin: 0;
+  max-width: 90vw;          /* ✅ ป้องกันข้อความล้นจอ */
+}
 .emoji-img {
  	 width: 80px;
  	 height: 80px;
@@ -149,17 +157,21 @@ input[type="checkbox"] {
   margin-right: 8px;
   cursor: pointer;
 }
+@media (min-width: 1024px) {
+  .header-text h1 {
+    font-size: 28px;
+  }
+}
 
   </style>
 </head>
 <body>
   <header>
-    <img src="ตรา.png" alt="โลโก้คลินิค">
-    <div>
-      <h1>ขอบคุณที่ใช้บริการ ร้านยาคลินิค ยา มอ ออ ครับ</h1>
-      <h2>แบบประเมินความพึงพอใจต่อการรับบริการ</h2>
-    </div>
-  </header>
+  <img src="ตรา.png" alt="โลโก้คลินิค">
+  <div class="header-text">
+    <h1>ขอบคุณที่ใช้บริการครับ ท่านสามารถประเมินความพึงพอใจในการใช้บริการครั้งนี้ได้เลยครับ</h1>
+  </div>
+</header>
 
   <div id="username-section">
     <label for="username">กรุณากรอก Username (001 - 009):</label>
