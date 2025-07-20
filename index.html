@@ -162,6 +162,33 @@ input[type="checkbox"] {
     font-size: 28px;
   }
 }
+#popupThankYou {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 40px 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #1b5e20;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
 
   </style>
 </head>
@@ -232,6 +259,9 @@ input[type="checkbox"] {
     <img src="promo4.jpg" alt="โปร 4">
     <img src="promo5.jpg" alt="โปร 5">
   </div>
+<div id="imageModal" onclick="closeModal()">
+  <img id="modalImage" src="" alt="แสดงภาพ">
+</div>
 
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwwgd4uW8H8C6IJp82W9C_2Rg-Ql2YigJ046MojaoPi-5pOZ7eJYzA0QqDuZKZN_cch/exec';
@@ -260,7 +290,7 @@ input[type="checkbox"] {
       location.reload();
     }
 
-    function submitRating(score) {
+   function submitRating(score) {
   const username = localStorage.getItem('username');
   const firstTimeChecked = document.getElementById('firstTime')?.checked;
 
@@ -275,17 +305,20 @@ input[type="checkbox"] {
     method: 'POST',
     body: data
   }).then(() => {
-    document.getElementById('thanks').textContent = 'ขอบคุณสำหรับการประเมิน💚';
+    // ✅ แสดง popup ขอบคุณ
+    document.getElementById('popupThankYou').style.display = 'flex';
 
-    // ล้าง checkbox
+    // ✅ ล้าง checkbox
     const checkbox = document.getElementById('firstTime');
     if (checkbox) checkbox.checked = false;
 
+    // ✅ ปิด popup หลัง 2 วิ
     setTimeout(() => {
-      document.getElementById('thanks').textContent = '';
-    }, 1500);
+      document.getElementById('popupThankYou').style.display = 'none';
+    }, 2000);
   }).catch(error => alert('ส่งข้อมูลไม่สำเร็จ: ' + error));
 }
+
 
 
 
@@ -316,9 +349,11 @@ function closeModal() {
   document.getElementById('imageModal').style.display = 'none';
 }
     </script>
-    
-<div id="imageModal" onclick="closeModal()">
-  <img id="modalImage" src="" alt="แสดงภาพ">
+   <div id="popupThankYou">
+  <div class="popup-content">
+    ขอบคุณสำหรับการประเมิน 💚
+  </div>
 </div>
+
 </body>
 </html>
